@@ -1,0 +1,18 @@
+{
+  "name": "clonex",
+  "version": "1.0.0",
+  "description": "this is the micro-blogging platform where any varified person can share their valuable thoughts without any problem. Our Mission is to Promote Free-Speech in Accross the blobe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "X",
+    "CloneX",
+    "blogging",
+    "frontend",
+    "backend"
+  ],
+  "author": "Ajay Dhanraj Sonar",
+  "license": "ISC"
+}
