@@ -1,3 +1,4 @@
-# This is the CLoneX App , Which is a Micro-Blogging Platform Made by Ajay Dhanraj Sonar
+# CLoneX App 
 
-this is Primerly based on nodejs backend with mongoDB database
+It is a Micro-Blogging Platform Made by Ajay Dhanraj Sonar.
+this is primarily based on node js backend with MongoDB database
