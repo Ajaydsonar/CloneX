@@ -2,9 +2,10 @@
   "name": "clonex",
   "version": "1.0.0",
   "description": "this is the micro-blogging platform where any varified person can share their valuable thoughts without any problem. Our Mission is to Promote Free-Speech in Accross the blobe",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "keywords": [
     "X",
@@ -14,5 +15,15 @@
     "backend"
   ],
   "author": "Ajay Dhanraj Sonar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  }
 }
