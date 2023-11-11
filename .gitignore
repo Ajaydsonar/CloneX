@@ -1,14 +1,9 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node,joe
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,joe
-
-### Joe ###
-# File backups
-*~
-# Gets created when joe crashes
-DEADJOE
+# Created by https://www.toptal.com/developers/gitignore/api/node
+# Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
 # Logs
+learn.txt
 logs
 *.log
 npm-debug.log*
@@ -75,7 +70,7 @@ web_modules/
 
 # Optional REPL history
 .node_repl_history
-Readme.md
+
 # Output of 'npm pack'
 *.tgz
 
@@ -147,4 +142,4 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-# End of https://www.toptal.com/developers/gitignore/api/node,joe
+# End of https://www.toptal.com/developers/gitignore/api/node
