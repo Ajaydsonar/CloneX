@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please Provide All the Fields");
   }
 
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
 
@@ -45,7 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please provide avatar");
   }
 
-  const user = User.create({
+  const user = await User.create({
     fullName,
     email,
     username: username.toLowerCase(),
@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, createdUser, "user registered Successfully!"));
+    .json(new ApiResponce(200, createdUser, "user registered Successfully!"));
 });
 
 export { registerUser };
