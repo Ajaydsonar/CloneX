@@ -28,11 +28,19 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (existedUser) {
-    throw new ApiError(409, "User Already Exists");
+    throw new ApiError(409, "User with email or username Already Exists");
   }
 
-  const avatarLocalPath = req.files.avatar[0]?.path;
+  const avatarLocalPath = req.files?.avatar[0]?.path;
+
+  // optimize way
   const coverImageLocalPath = req.files?.coverImage?.[0]?.path ?? undefined;
+
+  // another way of doing same thing
+  // let coverImageLocalPath;
+  // if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+  //   coverImageLocalPath = req.files.coverImage[0].path;
+  // }
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Please Provide Avatar!");
