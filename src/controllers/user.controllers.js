@@ -32,7 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const avatarLocalPath = req.files.avatar[0]?.path;
-  const coverImageLocalPath = req.files.coverImage[0]?.path;
+  const coverImageLocalPath = req.files?.coverImage?.[0]?.path ?? undefined;
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Please Provide Avatar!");
@@ -50,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     username: username.toLowerCase(),
     avatar: avatar.url,
-    coverImage: coverImage.url,
+    coverImage: coverImage?.url || "",
     password,
   });
 
