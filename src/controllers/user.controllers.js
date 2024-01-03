@@ -303,6 +303,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   if (!coverImage.url)
     throw new ApiError(200, "Error Occured While Uploading Cover image!");
 
+  // Todo : Add a Function TO delete Previous Avatar
   const user = await User.findByIdAndUpdate(
     user._id,
     {
@@ -318,6 +319,78 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     .json(new ApiResponce(200, user, "Cover Image Changed Successfully!"));
 });
 
+// Get user profile Details
+const getUserProfileDetails = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+
+  if (!username?.trim()) throw new ApiError(400, "username is missing!");
+
+  const userProfile = await User.aggregate([
+    {
+      $match: {
+        username: username?.toLowerCase(),
+      },
+    },
+    {
+      $lookup: {
+        from: "follows",
+        localField: "_id",
+        foreignField: "following",
+        as: "followers",
+      },
+    },
+    {
+      $lookup: {
+        from: "follows",
+        localField: "_id",
+        foreignField: "follower",
+        as: "followingTo",
+      },
+    },
+    {
+      $addFields: {
+        followersCount: {
+          $size: "$followers",
+        },
+        UserFollowedToCount: {
+          $size: "$followingTo",
+        },
+        isFollowed: {
+          $cond: {
+            if: { $in: [req.user?._id, "$followers.follower"] },
+            then: true,
+            else: false,
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        fullName: 1,
+        username: 1,
+        followersCount: 1,
+        UserFollowedToCount: 1,
+        isFollowed: 1,
+        avatar: 1,
+        coverImage: 1,
+        email: 1,
+      },
+    },
+  ]);
+
+  if (!userProfile?.length) throw new ApiError(400, "User Does Not Exist!");
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponce(
+        200,
+        userProfile[0],
+        "User Details Fetched! SuccessFully!"
+      )
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -328,4 +401,5 @@ export {
   updateAccountDetails,
   updateUserAvatar,
   updateUserCoverImage,
+  getUserProfileDetails,
 };
